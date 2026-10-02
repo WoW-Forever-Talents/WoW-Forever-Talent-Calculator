@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>WoW Forever Talent Calculator | Talent Trees & Build Planner</title>
+
+  <meta
+    name="description"
+    content="Free WoW Forever Talent Calculator and talent tree planner. Explore Warrior, Paladin, Hunter, Rogue, Priest, Shaman, Mage, Warlock and Druid talents, compare Classic changes, and create shareable WoW Forever builds."
+  />
+
+  <meta
+    name="keywords"
+    content="WoW Forever Talent Calculator, WoW Forever Talents, WoW Forever Talent Tree, WoW Forever Build Planner, WoW Forever Builds, WoW Forever Warrior Talents, WoW Forever Paladin Talents, WoW Forever Hunter Talents, WoW Forever Rogue Talents, WoW Forever Priest Talents, WoW Forever Shaman Talents, WoW Forever Mage Talents, WoW Forever Warlock Talents, WoW Forever Druid Talents"
+  />
+
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="WoW Forever Talents" />
+
+  <link
+    rel="canonical"
+    href="https://wow-forever-talents.github.io/WoW-Forever-Talent-Calculator/"
+  />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:title"
+    content="WoW Forever Talent Calculator | Talent Trees & Build Planner"
+  />
+  <meta
+    property="og:description"
+    content="Plan WoW Forever talents online. Explore all class talent trees, compare Classic changes, and create shareable builds."
+  />
+  <meta
+    property="og:url"
+    content="https://wow-forever-talents.github.io/WoW-Forever-Talent-Calculator/"
+  />
+  <meta
+    property="og:image"
+    content="https://wow-forever-talents.github.io/WoW-Forever-Talent-Calculator/images.jpeg"
+  />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta
+    name="twitter:title"
+    content="WoW Forever Talent Calculator"
+  />
+  <meta
+    name="twitter:description"
+    content="Explore WoW Forever talent trees, compare Classic changes, and create your build."
+  />
+  <meta
+    name="twitter:image"
+    content="https://wow-forever-talents.github.io/WoW-Forever-Talent-Calculator/images.jpeg"
+  />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "WoW Forever Talent Calculator",
+    "url": "https://wowforevertalents.org/",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Any",
+    "description": "Free WoW Forever talent calculator and build planner for exploring talent trees, comparing Classic changes, and creating shareable builds.",
+    "image": "https://wow-forever-talents.github.io/WoW-Forever-Talent-Calculator/images.jpeg",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #07090d;
+      --panel: #10141b;
+      --panel-soft: #151a23;
+      --text: #f5f1e8;
+      --muted: #a9b0bb;
+      --gold: #f3bf55;
+      --gold-light: #ffd87b;
+      --border: rgba(255,255,255,.09);
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(243,191,85,.10), transparent 32%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: -.02em;
+      font-size: 20px;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .nav-link:hover {
+      color: var(--gold-light);
+    }
+
+    .hero {
+      padding: 72px 0 54px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 52px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid rgba(243,191,85,.3);
+      border-radius: 999px;
+      color: var(--gold-light);
+      background: rgba(243,191,85,.08);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      max-width: 850px;
+    }
+
+    .hero p {
+      margin: 26px 0 0;
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .cta {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 60px;
+      padding: 0 30px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: #17120a;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 900;
+      box-shadow: 0 12px 40px rgba(243,191,85,.22);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 50px rgba(243,191,85,.3);
+    }
+
+    .secondary {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 60px;
+      padding: 0 25px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--text);
+      background: rgba(255,255,255,.03);
+    }
+
+    .hero-image-wrap {
+      position: relative;
+    }
+
+    .hero-image {
+      display: block;
+      width: 100%;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 70px rgba(0,0,0,.45);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 36px;
+      max-width: 650px;
+    }
+
+    .stat {
+      padding: 16px;
+      background: rgba(255,255,255,.035);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 22px;
+      color: var(--gold-light);
+    }
+
+    .stat span {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    .section-heading {
+      max-width: 780px;
+      margin-bottom: 34px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(32px, 5vw, 48px);
+      letter-spacing: -.04em;
+      line-height: 1.1;
+      margin: 0 0 14px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 26px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .classes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .class-item {
+      padding: 16px 18px;
+      border-radius: 10px;
+      background: var(--panel-soft);
+      border: 1px solid var(--border);
+    }
+
+    .class-item strong {
+      display: block;
+    }
+
+    .class-item span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .cta-section {
+      padding: 80px 0 100px;
+    }
+
+    .cta-box {
+      text-align: center;
+      padding: 58px 30px;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at top, rgba(243,191,85,.15), transparent 50%),
+        var(--panel);
+      border: 1px solid rgba(243,191,85,.20);
+    }
+
+    .cta-box h2 {
+      font-size: clamp(34px, 5vw, 54px);
+      letter-spacing: -.04em;
+      line-height: 1.05;
+      margin: 0;
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      max-width: 670px;
+      margin: 18px auto 28px;
+      font-size: 18px;
+    }
+
+    footer {
+      padding: 30px 0 50px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    footer a {
+      color: var(--gold-light);
+      text-decoration: none;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .classes {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero {
+        padding-top: 48px;
+      }
+
+      .hero-image-wrap {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 26px, var(--max));
+      }
+
+      .nav {
+        min-height: 62px;
+      }
+
+      .nav-link {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 30px;
+      }
+
+      h1 {
+        font-size: 43px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .cta,
+      .secondary {
+        width: 100%;
+      }
+
+      .stats,
+      .classes {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container nav">
+      <a
+        class="brand"
+        href="https://wowforevertalents.org/"
+        aria-label="WoW Forever Talents"
+      >
+        WoW Forever Talents
+      </a>
+
+      <a
+        class="nav-link"
+        href="https://wowforevertalents.org/"
+      >
+        Open Talent Calculator →
+      </a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div>
+          <div class="eyebrow">Free WoW Forever Build Planner</div>
+
+          <h1>WoW Forever Talent Calculator</h1>
+
+          <p>
+            Explore every WoW Forever talent tree, plan your character build,
+            compare talents with Classic, and create a shareable setup for
+            Warrior, Paladin, Hunter, Rogue, Priest, Shaman, Mage, Warlock,
+            and Druid.
+          </p>
+
+          <div class="hero-actions">
+            <a
+              class="cta"
+              href="https://wowforevertalents.org/"
+              title="Open WoW Forever Talent Calculator"
+            >
+              Build Your Talents →
+            </a>
+
+            <a
+              class="secondary"
+              href="#talent-trees"
+            >
+              Explore Talent Trees
+            </a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>9</strong>
+              <span>Playable Classes</span>
+            </div>
+
+            <div class="stat">
+              <strong>466</strong>
+              <span>Active Talents</span>
+            </div>
+
+            <div class="stat">
+              <strong>51</strong>
+              <span>Talent Points at Level 60</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-image-wrap">
+          <a
+            href="https://wowforevertalents.org/"
+            title="Play WoW Forever Talent Calculator"
+          >
+            <img
+              class="hero-image"
+              src="images.jpeg"
+              alt="WoW Forever Talent Calculator talent tree and build planner"
+              width="900"
+              height="600"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WHAT IS -->
+    <section>
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>Plan Your WoW Forever Build</h2>
+
+          <p>
+            WoW Forever Talent Calculator is a free browser-based talent tree
+            planner for exploring class talents, testing different builds,
+            and understanding how WoW Forever talents differ from Classic.
+          </p>
+        </div>
+
+        <div class="cards">
+
+          <article class="card">
+            <h3>Interactive Talent Calculator</h3>
+            <p>
+              Allocate talent points directly in each tree, follow talent
+              prerequisites, unlock deeper rows, and see how many points
+              remain while building your character.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Compare With Classic</h3>
+            <p>
+              Discover talents recorded as new, changed, moved, or unchanged
+              compared with their Classic counterparts.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Save & Share Builds</h3>
+            <p>
+              Experiment with different talent combinations and create
+              shareable build links for friends, guild members, or
+              theorycrafting discussions.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TALENT TREES -->
+    <section id="talent-trees">
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>WoW Forever Talent Trees</h2>
+
+          <p>
+            Browse talent trees for all nine supported classes and experiment
+            with builds using the full WoW Forever Talent Calculator.
+          </p>
+        </div>
+
+        <div class="classes">
+
+          <div class="class-item">
+            <strong>Warrior</strong>
+            <span>Arms · Fury · Protection</span>
+          </div>
+
+          <div class="class-item">
+            <strong>Paladin</strong>
+            <span>Holy · Protection · Retribution</span>
+          </div>
+
+          <div class="class-item">
+            <strong>Hunter</strong>
+            <span>Beast Mastery · Marksmanship · Survival</span>
+          </div>
+
+          <div class="class-item">
+            <strong>Rogue</strong>
+            <span>Assassination · Combat · Subtlety</span>
+          </div>
+
+          <div class="class-item">
+            <strong>Priest</strong>
+            <span>Discipline · Holy · Shadow</span>
+          </div>
+
+          <div class="class-item">
+            <strong>Shaman</strong>
+            <span>Elemental · Enhancement · Restoration</span>
+          </div>
+
+          <div class="class-item">
+            <strong>Mage</strong>
+            <span>Arcane · Fire · Frost</span>
+          </div>
+
+          <div class="class-item">
+            <strong>Warlock</strong>
+            <span>Affliction · Demonology · Destruction</span>
+          </div>
+
+          <div class="class-item">
+            <strong>Druid</strong>
+            <span>Balance · Feral Combat · Restoration</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEO CONTENT -->
+    <section>
+      <div class="container">
+
+        <div class="section-heading">
+          <h2>WoW Forever Build Planner</h2>
+
+          <p>
+            Test different talent combinations before committing to a build.
+            The calculator lets you adjust your character level, spend talent
+            points, inspect talent requirements, and plan builds up to level 60.
+          </p>
+        </div>
+
+        <div class="cards">
+
+          <article class="card">
+            <h3>Leveling Builds</h3>
+            <p>
+              Explore how your talent setup develops as you level and decide
+              which talents to prioritize while progressing.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>PvE & PvP Builds</h3>
+            <p>
+              Experiment with different combinations for PvE, PvP, hybrid,
+              or specialized playstyles.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Class Theorycrafting</h3>
+            <p>
+              Compare talent changes, test alternative paths, and share
+              builds with other WoW Forever players.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="cta-section">
+      <div class="container">
+
+        <div class="cta-box">
+
+          <h2>Build Your WoW Forever Talents</h2>
+
+          <p>
+            Choose your class, allocate your talent points, compare changes
+            with Classic, and create your WoW Forever build online.
+          </p>
+
+          <a
+            class="cta"
+            href="https://wowforevertalents.org/"
+            title="Launch WoW Forever Talent Calculator"
+          >
+            Open WoW Forever Talent Calculator →
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>
+        WoW Forever Talent Calculator is an independent fan-made community
+        resource for talent trees and build planning.
+      </p>
+
+      <p>
+        Talent information is based on a dated beta snapshot and may change.
+        This project is not affiliated with or endorsed by Blizzard Entertainment.
+      </p>
+
+      <p>
+        Main website:
+        <a href="https://wowforevertalents.org/">
+          wowforevertalents.org
+        </a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
